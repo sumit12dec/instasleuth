@@ -67,6 +67,8 @@ def cloud_extract_data(request):
             return JsonResponse(response)
         else:
             chunked_data = text[0].split("\n")
+            if len(chunked_data[0])>21:
+                chunked_data.insert(0, 'FORCE_REORDER')
             response['user_name'] = chunked_data[2]
             response['user_dob'] = chunked_data[4]
             response['user_pan'] = chunked_data[6]
