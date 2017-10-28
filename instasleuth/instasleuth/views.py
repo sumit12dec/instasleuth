@@ -72,6 +72,14 @@ def cloud_extract_data(request):
             response['user_name'] = chunked_data[2]
             response['user_dob'] = chunked_data[4]
             response['user_pan'] = chunked_data[6]
+            if len(chunked_data[6]) != 10:
+                if len(chunked_data[5]) == 10 and chunked_data[5][5:9].isdigit():
+                    response['user_pan'] = chunked_data[5]
+                elif len(chunked_data[7]) == 10 and chunked_data[7][5:9].isdigit():
+                    response['user_pan'] = chunked_data[7]
+                elif len(chunked_data[4]) == 10 and chunked_data[4][5:9].isdigit():
+                    response['user_pan'] = chunked_data[4]
+
         response['full_extracted_text'] = text
         return JsonResponse(response, status=200)
     except Exception as e:
