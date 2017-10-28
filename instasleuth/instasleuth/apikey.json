@@ -1,0 +1,12 @@
+{
+ "type": "service_account",
+ "project_id": "instamojo-hackathon",
+ "private_key_id": "951caf586a1f524cc6bf77dd46d2da1779c0e728",
+ "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDTgQ7Wtuj2l/85\npqoj9GQ4E+SswGSQ6B5tCp8nTyBYAg5cmzq+AnaSXlCTFy7Q1VrkDj7yXm35WHU/\nXr4/BabEQRx5yFzzlvy+LxQo3LhAE5lOoOVuyjivmXs5ajaoOrnTP+Gg85/433cq\nyw/dbftKRNiIpHuW+ZpcAvCNORyTyRjNbHjmnnUCw+YmXZHKvaEmoOdTTbaPTOUR\nsLmW7v1XN3M8yIQDw1zZFPqi5/XRsruqmzKm2blVzKvR0JZd6IcYwVWjxLdZHPB7\nAXr43IitAEiL6s7yfQIpO/47wsDUlpX/j8qDeYMPb6oMXxsWvLwhkuXr+pjDUkTQ\nxItLVgCTAgMBAAECggEAQi80kYQTSnct6sB4pV+orNOsz1I1JhM80ipsu0RLfr7F\n97yrmSH0MMFKvXyXrcnV819x2y4pg8lmhzoCln4SPX+ShZlpXOB2npzk1hSbo5F+\ne9hlc1HcgzaoFMNj7yjRVYW7+T3DZYGoLL/2avgrloYMrFWsRwY8g2Z4F/kzNBs7\n67g3U9ZpmAGcb5BRv2cfPfTJkSuT5vxW0Ac/63L2BoUAoYUBB9heJffi1s18AAcl\nmvVwi02rmRwPYYB3TAJrgS7ubw6c4DFj9pSKgb1rGGPpZeGIz0rAxB98TEhst2XH\n0GMFTPev0r+9B06qJbZGxTAvp2R5doWkjukc+vnJoQKBgQDw6xMRQK3FHlTSs2BW\nDe3xlAttKRi/aCLQfTPSDeBMYOzIoH0pN7tHYdf019BZ9TADrAlvsX0Pq8ZjUtz9\nthJYQnPKnWmhn/tOmRk7cm7kRSAvy3fSnoCmnlhmICglwkYmgXXKkHIxqKVWKwCS\nygB8ELd+rVQSyM9aIM1xDru1xQKBgQDgvpiuJrFBg1ObpfXG82A0hv/WdtZ7ML+N\ntbd5mhkbzClSmW2GrSgD6Rt1W3DaDrPhj67T+dQDaB5xq4rhJoq9/xEUnKMjHqoL\nPSBO01/AMfYk6af6xRYr6/QENoITqK1rElBBKQrabwjYT6wbsYrP03Q72/vYlANA\ntnxFk4yadwKBgQC+ap6EeWGfNk0GyB4xhgr2cPPjEKNtzcoOjZbixHLvC4C7RhYG\n+PS+A7ij3dvg7ilIDbbboCZft34zTPA8W6b+OW+5ylcOFxuTUPCfit/Y7kX1YNVR\nFFRM3USzW2FADuBRWOuX8jk/xLMBezWVz7E4XiIaLrcPrcYtz1VxsZptnQKBgA2V\nV3MHIaV9A3ufzzgEE6d5FVNoAVSWwK0W84zk9GmKsGCup0EBjC6YUzGHok17oAGd\nBosHSXofO9/Q52buRmpvVR/yy6VewBZHzoEVI29hVagrexyb9tgWvbvXc4suobSb\n+b/GdEJ5fYZdYmCWHXasKBVKGXGgmIW7wc0OuuvHAoGADGGPbWg3KmAdojL5orfF\nQ5DtMEHmbJwqOFwkbYTP7xt7Zj8UoJwCc3UlbLMykGFwmiPgC/zFB4IF9cYTig9Z\nxoEl6cwyV6866fZYmrdOETSZmPuCJuPiDdnXRB24wJd+vOl33924vt7svcALsdq/\nrHw4urkxJGA5uWPAg0JpXlc=\n-----END PRIVATE KEY-----\n",
+ "client_email": "instamojo@instamojo-hackathon.iam.gserviceaccount.com",
+ "client_id": "102334990620691955703",
+ "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+ "token_uri": "https://accounts.google.com/o/oauth2/token",
+ "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+ "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/instamojo%40instamojo-hackathon.iam.gserviceaccount.com"
+}
