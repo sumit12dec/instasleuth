@@ -4,7 +4,10 @@ from django.conf import settings
 from pan_parser import parse_pan
 from cloud_vision import cloud_api
 import time
+import json
 from django.views.decorators.csrf import csrf_exempt
+from .models import UserPoints, UserData
+from django.core import serializers
 
 #BASE = '/Users/sumit/Desktop/instamojo/instasleuth'
 BASE = '/var/www/'
@@ -88,3 +91,55 @@ def cloud_extract_data(request):
         response['message'] = "No data"
         # response['message'] = "Token string has been expired"
         return JsonResponse(response, status=500)
+
+@csrf_exempt
+def user_points(request):
+    if request.method == "POST":
+        user_name = request.POST.get('user_name')
+        user_points = request.POST.get('user_points')
+        obj = UserPoints(user_name=user_name, user_points=user_points)
+        obj.save()
+        new_obj = UserPoints.objects.get(user_name=user_name)
+
+        return JsonResponse({'user_id': new_obj.user_id})
+    elif request.method == "GET":
+        print request.body
+        user_input = request.GET.get('user_name')
+        print user_input
+        obj = UserPoints.objects.get(user_name=user_input)
+        response = {}
+        response['user_name'] = obj.user_name
+        response['user_id'] = obj.user_id
+        response['user_points'] = obj.user_points
+        return JsonResponse(response)
+
+@csrf_exempt
+def user_data(request):
+    if request.method == "POST":
+        user_id = request.POST.get('user_id')
+        user_name = request.POST.get('user_name')
+        user_pan = request.POST.get('user_pan')
+        user_dob = request.POST.get('user_dob')
+        print user_id, user_name, user_pan, user_dob
+        try:
+            print UserData.objects.all()
+            obj = UserData(user_id_fk = UserPoints(user_id=user_id),
+            user_name = user_name,
+            user_pan = user_pan,
+            user_dob = user_dob)
+            obj.save()            
+        except Exception as e: 
+            print e       
+            return HttpResponse(repr(e))
+        return HttpResponse("Data saved succesfully")
+    elif request.method == "GET":
+        user_input = request.GET.get('user_name')
+        obj = UserData.objects.get(user_name=user_input)
+        response = {}
+        print obj, "objj"
+        response['user_name'] = obj.user_name
+        response['user_id'] = obj.user_id_fk.user_id
+        response['user_points'] = obj.user_pan
+        response['user_dob'] = obj.user_dob
+        response['update_time'] = obj.user_correction_timestamp
+        return JsonResponse(response)
