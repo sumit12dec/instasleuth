@@ -5,6 +5,7 @@ from google.cloud.vision import types
 
 def detect_text(path):
     """Detects text in the file."""
+    print "detect_text"
     client = vision.ImageAnnotatorClient()
 
     with io.open(path, 'rb') as image_file:
@@ -28,6 +29,7 @@ def detect_text(path):
     return list_of_texts
 
 def cloud_api(file_name):
+    print "cloud_api"
     #PATH = '/Users/sumit/Downloads/apikey.json'
     PATH = '/var/www/apikey.json'
     vision_client = vision.Client.from_service_account_json(PATH)
