@@ -1,9 +1,11 @@
-import { ACTION_TYPE } from "../actions";
+import { FETCH_USERS,UPLOAD_PAN } from "../actions";
 
 export default function(state = {}, action) {
     switch (action.type) {
-      case ACTION_TYPE:
-        return action.payload.data;
+      case FETCH_USERS:
+        return action.payload;
+      case UPLOAD_PAN:
+        return action.payload;
       default:
         return state;
     }

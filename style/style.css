@@ -1,0 +1,28 @@
+
+.dropzone{ 
+width: 100%;
+height: 150px;
+}
+.dropzone div{
+    text-align: center;
+    padding: 4em;
+}
+.verify-card{
+    max-width: 30em;
+}
+.has-danger input{
+border-color: #dc3545;
+}
+.capitalise-content input{
+    text-transform: uppercase;
+}
+
+.leadership-board{
+    text-transform: capitalize;
+}
+
+.loader{
+    padding-top: 3em;
+    width: 15%;
+    margin: 0 auto;
+}

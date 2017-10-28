@@ -1,3 +1,4 @@
+import _ from "lodash";
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -5,7 +6,9 @@ import { createStore, applyMiddleware } from 'redux';
 import reduxThunk from 'redux-thunk';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import App from './components/app';
+import LeadershipBoard from './components/leadershipboard';
+import PanUpload from './components/panupload';
+import VerifyPAN from './components/verifypan';
 import reducers from './reducers';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
@@ -15,7 +18,9 @@ ReactDOM.render(
      <BrowserRouter>
       <div>
         <Switch>  
-          <Route path="/" component={App} />
+          <Route path="/upload/:id" component={PanUpload} />
+          <Route path="/verify/:id" component={VerifyPAN} />
+          <Route path="/" component={LeadershipBoard} />
         </Switch>
       </div>
     </BrowserRouter>

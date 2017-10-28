@@ -9,8 +9,8 @@ module.exports = {
   },
   module: {
     loaders: [{
-      exclude: /node_modules/,
       loader: 'babel',
+      exclude: /node_modules/,     
       query: {
         presets: ['react', 'es2015', 'stage-1']
       }
@@ -22,5 +22,8 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     contentBase: './'
+  },
+  node: {
+    fs: "empty"
   }
 };
