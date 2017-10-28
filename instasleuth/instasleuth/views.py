@@ -105,6 +105,11 @@ def user_points(request):
     elif request.method == "GET":
         print request.body
         user_input = request.GET.get('user_name')
+        if user_input == None:
+            objs = UserPoints.objects.all()
+            de_objs = [{'user_id':o.user_id, 'user_name':o.user_name, 'user_points': o.user_points} for o in objs]
+            print de_objs
+            return JsonResponse({'all_data':de_objs})
         print user_input
         obj = UserPoints.objects.get(user_name=user_input)
         response = {}
