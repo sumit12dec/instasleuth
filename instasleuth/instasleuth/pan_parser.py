@@ -69,7 +69,7 @@ def parse_pan(uploaded_image):
 	    result = image.crop(box)
 	    t = image_name.split('/')
 	    cropped_image_name = "/".join(t[0:-1]+['cropped', '']) + t[-1]
-	    print result,cropped_image_name
+	    print result, cropped_image_name
 	    result.save(cropped_image_name)
 	    #result.show()
 	    ratio = (box[2] - box[0])/float(box[3]-box[1])
