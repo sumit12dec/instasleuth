@@ -6,6 +6,7 @@ from cloud_vision import cloud_api
 import time
 from django.views.decorators.csrf import csrf_exempt
 
+#BASE = '/Users/sumit/Desktop/instamojo/instasleuth'
 BASE = '/var/www/'
 def handle_uploaded_file(file):
     with open(BASE + file.name, 'wb+') as destination:
