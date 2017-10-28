@@ -5,7 +5,8 @@ def cloud_api(file_name):
     from google.cloud.vision import types
 
 
-    vision_client = vision.Client()
+    vision_client = vision.Client.from_service_account_json('../instasleuth/instasleuth/apikey.json')
+
     with io.open(file_name,'rb') as image_file:
            content = image_file.read();
            image= vision_client.image(content=content)
@@ -33,12 +34,14 @@ def cloud_api(file_name):
         texts = response.text_annotations
         print('Texts:')
 
+        list_of_texts = []
         for text in texts:
             print('\n"{}"'.format(text.description))
-
+            list_of_texts.append(text.description)
             vertices = (['({},{})'.format(vertex.x, vertex.y)
                         for vertex in text.bounding_poly.vertices])
 
             print('bounds: {}'.format(','.join(vertices)))
-        return str(text.description)
-    detect_text(file_name)
+        print list_of_texts, "list_of_texts"
+        return list_of_texts
+    return detect_text(file_name)

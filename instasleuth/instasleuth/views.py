@@ -60,7 +60,15 @@ def cloud_extract_data(request):
         print type(file), "fileeee"
         handle_uploaded_file(file)
         text = cloud_api(file.name)
-        response['extracted_text'] = text
+        if "INCOME TAX DEPARTMENT" not in text[0]:
+            response['status'] = "Invalid Image"
+            return JsonResponse(response)
+        else:
+            chunked_data = text[0].split("\n")
+            response['user_name'] = chunked_data[2]
+            response['user_dob'] = chunked_data[4]
+            response['user_pan'] = chunked_data[6]
+        response['full_extracted_text'] = text
         return JsonResponse(response, status=200)
     except Exception as e:
         print(e)
