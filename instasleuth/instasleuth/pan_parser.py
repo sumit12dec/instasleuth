@@ -59,13 +59,15 @@ def parse_pan(uploaded_image):
 	    return tuple(retval)
 
 	def crop_image(image_name):
+		print "here crop image"
 	    image = Image.open(image_name)
 	    image = image.filter(ImageFilter.SHARPEN)
 
 	    box = getbox(image)
 	    #print "result is: ",box
 	    result = image.crop(box)
-	    cropped_image_name = image_name+'cropped.jpg'
+	    t = image_name.split('/')
+	    cropped_image_name = "/".join(t[0:-1]+['cropped', '']) + t[-1]
 	    result.save(cropped_image_name)
 	    #result.show()
 	    ratio = (box[2] - box[0])/float(box[3]-box[1])
