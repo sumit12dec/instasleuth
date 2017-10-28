@@ -59,7 +59,8 @@ def parse_pan(uploaded_image):
 	    return tuple(retval)
 
 	def crop_image(image_name):
-	    print "here crop image"
+	    print "here crop image", image_name
+	    
 	    image = Image.open(image_name)
 	    image = image.filter(ImageFilter.SHARPEN)
 
