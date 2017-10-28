@@ -65,7 +65,7 @@ def parse_pan(uploaded_image):
 	    box = getbox(image)
 	    #print "result is: ",box
 	    result = image.crop(box)
-	    cropped_image_name = image_name
+	    cropped_image_name = image_name+'cropped.jpg'
 	    result.save(cropped_image_name)
 	    #result.show()
 	    ratio = (box[2] - box[0])/float(box[3]-box[1])
