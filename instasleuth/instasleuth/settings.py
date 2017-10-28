@@ -105,5 +105,6 @@ USE_TZ = True
 STATIC_ROOT = '/static/'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
-    "/usr/local/lib/python2.7/site-packages/django/contrib/admin/static",
+    "/var/www/instasleuth/instasleuth/static",
+    "/var/www/instasleuth/instasleuth"
 )
