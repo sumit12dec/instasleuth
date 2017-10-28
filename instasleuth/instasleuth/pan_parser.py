@@ -63,7 +63,7 @@ def parse_pan(uploaded_image):
 	    
 	    image = Image.open(image_name)
 	    image = image.filter(ImageFilter.SHARPEN)
-
+	    print "here", image
 	    box = getbox(image)
 	    #print "result is: ",box
 	    result = image.crop(box)
