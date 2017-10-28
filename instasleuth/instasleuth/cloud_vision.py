@@ -4,8 +4,7 @@ def cloud_api(file_name):
     from google.cloud import vision
     from google.cloud.vision import types
 
-
-    vision_client = vision.Client.from_service_account_json('../instasleuth/instasleuth/apikey.json')
+    vision_client = vision.Client.from_service_account_json('/var/www/apikey.json')
 
     with io.open(file_name,'rb') as image_file:
            content = image_file.read();

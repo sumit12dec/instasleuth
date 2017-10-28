@@ -6,9 +6,9 @@ from cloud_vision import cloud_api
 
 from django.views.decorators.csrf import csrf_exempt
 
-
+BASE = '/var/www/'
 def handle_uploaded_file(file):
-    with open(file.name, 'wb+') as destination:
+    with open(BASE + file.name, 'wb+') as destination:
         for chunk in file.chunks():
             destination.write(chunk)
 
@@ -31,7 +31,7 @@ def get_pan_data(request):
         extension = file.name.split('.')[-1]#won't work correctly if file name has no '.'
         print type(file), "fileeee"
         handle_uploaded_file(file)
-        user_name, fathers_name, dob, pan_card_no = parse_pan(file.name)
+        user_name, fathers_name, dob, pan_card_no = parse_pan(BASE+file.name)
         response['user_name'] = user_name
         response['fathers_name'] = fathers_name
         response['dob'] = dob
@@ -59,7 +59,7 @@ def cloud_extract_data(request):
         extension = file.name.split('.')[-1]#won't work correctly if file name has no '.'
         print type(file), "fileeee"
         handle_uploaded_file(file)
-        text = cloud_api(file.name)
+        text = cloud_api(BASE+file.name)
         if "INCOME TAX DEPARTMENT" not in text[0]:
             response['status'] = "Invalid Image"
             return JsonResponse(response)
