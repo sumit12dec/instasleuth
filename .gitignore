@@ -1,3 +1,4 @@
+
 /node_modules
 bundle.js
 npm-debug.log
@@ -7,4 +8,7 @@ npm-debug.log
 *.iml
 /.idea
 
-Instamojo Hackathon-951caf586a1f.json
+=======
+*.pyc
+*.sqlite3
+

@@ -15,6 +15,9 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+FILE_UPLOAD_PERMISSIONS = 0755
+
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -37,6 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'instasleuth',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -98,5 +102,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
-
+STATIC_ROOT = '/static/'
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    "/var/www/instasleuth/instasleuth/static",
+    "/var/www/instasleuth/instasleuth"
+)
