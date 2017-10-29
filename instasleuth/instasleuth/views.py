@@ -116,7 +116,8 @@ def user_points(request):
     if request.method == "POST":
         user_name = request.POST.get('user_name')
         user_points = request.POST.get('user_points')
-        obj = UserPoints(user_name=user_name, user_points=user_points)
+        obj = UserPoints(user_name=user_name, user_points=user_points)[]
+
         obj.save()
         new_obj = UserPoints.objects.get(user_name=user_name)
 
@@ -170,11 +171,11 @@ def user_data(request, user_id):
             print obj, "jlkj"
             response = {}
             print obj, "objj"
-            response['user_name'] = obj.user_name
-            response['user_id'] = obj.user_id_fk.user_id
-            response['user_points'] = obj.user_pan
-            response['user_dob'] = obj.user_dob
-            response['user_image_url'] = obj.user_image_url
+            response['image_name'] = obj.user_name
+            response['image_id'] = obj.user_id_fk.user_id
+            response['image_pan'] = obj.user_pan
+            response['image_dob'] = obj.user_dob
+            response['image_url'] = obj.user_image_url
             response['update_time'] = obj.user_correction_timestamp
             return JsonResponse(response)
         except Exception as e:
@@ -186,9 +187,9 @@ def edit_data(request, user_id):
         if not user_id:
             user_id = request.POST.get('user_id')
         request_data = json.loads(request.body)
-        user_name = request_data.get('user_name')
-        user_pan = request_data.get('user_pan')
-        user_dob = request_data.get('user_dob')
+        user_name = request_data.get('image_name')
+        user_pan = request_data.get('image_pan')
+        user_dob = request_data.get('image_dob')
         print user_id, user_name, user_pan, user_dob
         
         try:
