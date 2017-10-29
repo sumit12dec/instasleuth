@@ -62,7 +62,8 @@ def cloud_extract_data(request, user_id):
         file = request.FILES['file']
         if not user_id:
             user_id = request.POST.get('user_id')
-        obj = UserPoints(user_points=0, user_name='N/A')
+        usr = UserPoints(user_id=user_id)
+        obj = UserPoints(user_points=0, user_name=usr.user_name)
         obj.save()
     except KeyError as e:
         return HttpResponse("The parameter "+ str(e) + " is missing", status=400)
