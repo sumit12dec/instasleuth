@@ -166,10 +166,8 @@ def user_data(request, user_id):
         print type(user_input),"this"
         try:    
             obj = UserData.objects.filter(user_id_fk=user_input).order_by('-user_correction_timestamp').first()
-
-            print obj, "jlkj"
             response = {}
-            print obj, "objj"
+            print list(obj), "objj"
             response['image_name'] = obj.user_name
             response['image_id'] = obj.user_id_fk.user_id
             response['image_pan'] = obj.user_pan
