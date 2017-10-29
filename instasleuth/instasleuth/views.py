@@ -17,7 +17,7 @@ def handle_uploaded_file(file):
         for chunk in file.chunks():
             destination.write(chunk)
     time.sleep(2)
-    copyfile(BASE+file.name, '/var/www/instasleuth/instasleuth/static/')
+    copyfile(BASE+file.name, '/var/www/instasleuth/instasleuth/static/'+file.name)
 
 
 
