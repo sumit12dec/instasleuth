@@ -83,9 +83,9 @@ def parse_pan(uploaded_image):
 	    img = Image.open(image_to_process)
 	    img2 = img.rotate(90, expand=True)
 	    img2.save(image_to_process)
-
+	    print "here"
 	t = Image.open(image_to_process)
-
+	print "here2222"
 	text_from_image = image_to_string(t, lang='eng')
 	print text_from_image,"text_from_image"
 
@@ -93,7 +93,9 @@ def parse_pan(uploaded_image):
 	if "INCOME" in text_from_image or "GOVT" in text_from_image:
 	    pass
 	else:
+		print "okay"
 	    img = Image.open(image_to_process)
+	    print "not kay"
 	    img2 = img.rotate(180, expand=True)
 	    img2.save(image_to_process)
 	    t = Image.open(image_to_process)
