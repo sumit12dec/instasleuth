@@ -97,7 +97,7 @@ def cloud_extract_data(request, user_id):
             user_name = response['user_name'],
             user_pan = response['user_pan'],
             user_dob = response['user_dob'],
-            user_image_url = '/var/www/instasleuth/instasleuth/static/' + file.name)
+            user_image_url = 'http://34.227.56.111/static/' + file.name)
             obj.save()            
         except Exception as e: 
             print e       
