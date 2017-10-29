@@ -50,12 +50,16 @@ def get_pan_data(request):
         return JsonResponse(response, status=500)
 
 @csrf_exempt
-def cloud_extract_data(request):
+def cloud_extract_data(request, user_id):
 
     response = {}
     print request.FILES
     try:
         file = request.FILES['file']
+        if not user_id:
+            user_id = request.POST.get('user_id')
+        obj = UserPoints(user_points=0, user_name='N/A')
+        obj.save()
     except KeyError as e:
         return HttpResponse("The parameter "+ str(e) + " is missing", status=400)
     
@@ -84,13 +88,23 @@ def cloud_extract_data(request):
                     response['user_pan'] = chunked_data[4]
 
         response['full_extracted_text'] = text
-        return JsonResponse(response, status=200)
+        try:
+            obj = UserData(user_id_fk = UserPoints(user_id=user_id),
+            user_name = response['user_name'],
+            user_pan = response['user_pan'],
+            user_dob = response['user_dob'])
+            obj.save()            
+        except Exception as e: 
+            print e       
+            return HttpResponse(repr(e))       
     except Exception as e:
         print(e)
         response['status'] = "error"
         response['message'] = "No data"
         # response['message'] = "Token string has been expired"
         return JsonResponse(response, status=500)
+    return JsonResponse({'user_id': user_id}, status=200)
+
 
 @csrf_exempt
 def user_points(request):
@@ -119,7 +133,7 @@ def user_points(request):
         return JsonResponse(response)
 
 @csrf_exempt
-def user_data(request):
+def user_data(request, user_id):
     if request.method == "POST":
         user_id = request.POST.get('user_id')
         user_name = request.POST.get('user_name')
@@ -137,9 +151,17 @@ def user_data(request):
             print e       
             return HttpResponse(repr(e))
         return HttpResponse("Data saved succesfully")
+    
     elif request.method == "GET":
-        user_input = request.GET.get('user_name')
-        obj = UserData.objects.get(user_name=user_input)
+        if not user_id:
+            user_input = request.GET.get('user_id')
+        else:
+            print "direct"
+            user_input = user_id
+        print type(user_input),"this"
+        obj = UserData.objects.filter(user_id_fk=user_input).order_by('-user_correction_timestamp').first()
+
+        print obj, "jlkj"
         response = {}
         print obj, "objj"
         response['user_name'] = obj.user_name
@@ -148,3 +170,33 @@ def user_data(request):
         response['user_dob'] = obj.user_dob
         response['update_time'] = obj.user_correction_timestamp
         return JsonResponse(response)
+
+
+@csrf_exempt
+def edit_data(request, user_id):
+    if request.method == "POST":
+        if not user_id:
+            user_id = request.POST.get('user_id')
+        request_data = json.loads(request.body)
+        user_name = request_data.get('user_name')
+        user_pan = request_data.get('user_pan')
+        user_dob = request_data.get('user_dob')
+        print user_id, user_name, user_pan, user_dob
+        
+        try:
+            print UserData.objects.all()
+            #     obj = UserData(user_id_fk = UserPoints(user_id=user_id),
+            #     user_name = user_name,
+            #     user_pan = user_pan,
+            #     user_dob = user_dob)
+            #     obj.save()            
+            # except Exception as e: 
+            obj = UserData(user_id_fk = UserPoints(user_id=user_id))
+            obj.user_name = user_name
+            obj.user_pan = user_pan
+            obj.user_dob = user_dob
+            obj.save()
+        except Exception as e: 
+            print e      
+            return HttpResponse(repr(e))
+        return HttpResponse("Data saved succesfully")
