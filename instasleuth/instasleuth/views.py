@@ -72,7 +72,7 @@ def cloud_extract_data(request, user_id):
         extension = file.name.split('.')[-1]#won't work correctly if file name has no '.'
         print type(file), "fileeee"
         handle_uploaded_file(file)
-        text = cloud_api(BASE+file.name)
+        text = cloud_api(BASE + file.name)
         if "INCOME TAX DEPARTMENT" not in text[0]:
             response['status'] = "Invalid Image"
             return JsonResponse(response)
@@ -96,7 +96,8 @@ def cloud_extract_data(request, user_id):
             obj = UserData(user_id_fk = UserPoints(user_id=user_id),
             user_name = response['user_name'],
             user_pan = response['user_pan'],
-            user_dob = response['user_dob'])
+            user_dob = response['user_dob'],
+            user_image_url = '/var/www/instasleuth/instasleuth/static/' + file.name)
             obj.save()            
         except Exception as e: 
             print e       
@@ -173,6 +174,7 @@ def user_data(request, user_id):
             response['user_id'] = obj.user_id_fk.user_id
             response['user_points'] = obj.user_pan
             response['user_dob'] = obj.user_dob
+            response['user_image_url'] = obj.user_image_url
             response['update_time'] = obj.user_correction_timestamp
             return JsonResponse(response)
         except Exception as e:
