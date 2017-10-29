@@ -8,6 +8,7 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 from .models import UserPoints, UserData
 from django.core import serializers
+from shutil import copyfile
 
 #BASE = '/Users/sumit/Desktop/instamojo/instasleuth'
 BASE = '/var/www/'
@@ -15,7 +16,10 @@ def handle_uploaded_file(file):
     with open(BASE + file.name, 'wb+') as destination:
         for chunk in file.chunks():
             destination.write(chunk)
-    time.sleep(5)
+    time.sleep(2)
+    copyfile(BASE+file.name, '/var/www/instasleuth/instasleuth/static/')
+
+
 
 
 @csrf_exempt
