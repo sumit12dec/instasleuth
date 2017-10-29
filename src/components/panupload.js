@@ -15,11 +15,13 @@ class ImageUpload extends Component {
 
       componentWillReceiveProps(nextProps) {
         console.log(nextProps.panDetails.user_id);
-        console.log(nextProps);
+        console.log(nextProps.panDetails.status);
         if(nextProps.panDetails.user_id){ 
             console.log('redirect');
                 this.props.history.push(`/verify/${nextProps.panDetails.user_id}`);
-        }       
+        } else if (nextProps.panDetails.status=="Invalid Image"){
+            this.setState({ fileError : 1, processing:0 });
+        }      
       }
 
       showMessage(){
@@ -29,7 +31,7 @@ class ImageUpload extends Component {
             return (
                 <div className="card-footer">
                     <div className="alert alert-danger" role="alert">
-                        Invalid file type. Please upload only png/jpg files.
+                        Invalid file type. Please upload only PAN CARDs of png/jpg file types.
                     </div>
                 </div>
             ); 
