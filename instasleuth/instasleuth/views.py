@@ -74,6 +74,9 @@ def cloud_extract_data(request, user_id):
         print type(file), "fileeee"
         handle_uploaded_file(file)
         text = cloud_api(BASE + file.name)
+        if len(text) == 0:
+            response['status'] = "Invalid Image"
+            return JsonResponse(response)
         if "INCOME TAX DEPARTMENT" not in text[0]:
             response['status'] = "Invalid Image"
             return JsonResponse(response)
