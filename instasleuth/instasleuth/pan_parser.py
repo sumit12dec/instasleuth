@@ -78,7 +78,7 @@ def parse_pan(uploaded_image):
 
 	image_to_process, ratio = crop_image(uploaded_image)
 
-
+	print image_to_process, "image_to_process", ratio
 	if ratio < 1:
 	    img = Image.open(image_to_process)
 	    img2 = img.rotate(90, expand=True)
