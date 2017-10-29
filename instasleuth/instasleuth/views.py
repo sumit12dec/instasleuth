@@ -159,18 +159,20 @@ def user_data(request, user_id):
             print "direct"
             user_input = user_id
         print type(user_input),"this"
-        obj = UserData.objects.filter(user_id_fk=user_input).order_by('-user_correction_timestamp').first()
+        try:    
+            obj = UserData.objects.filter(user_id_fk=user_input).order_by('-user_correction_timestamp').first()
 
-        print obj, "jlkj"
-        response = {}
-        print obj, "objj"
-        response['user_name'] = obj.user_name
-        response['user_id'] = obj.user_id_fk.user_id
-        response['user_points'] = obj.user_pan
-        response['user_dob'] = obj.user_dob
-        response['update_time'] = obj.user_correction_timestamp
-        return JsonResponse(response)
-
+            print obj, "jlkj"
+            response = {}
+            print obj, "objj"
+            response['user_name'] = obj.user_name
+            response['user_id'] = obj.user_id_fk.user_id
+            response['user_points'] = obj.user_pan
+            response['user_dob'] = obj.user_dob
+            response['update_time'] = obj.user_correction_timestamp
+            return JsonResponse(response)
+        except Exception as e:
+            return HttpResponse("User not found")
 
 @csrf_exempt
 def edit_data(request, user_id):
