@@ -116,8 +116,7 @@ def user_points(request):
     if request.method == "POST":
         user_name = request.POST.get('user_name')
         user_points = request.POST.get('user_points')
-        obj = UserPoints(user_name=user_name, user_points=user_points)[]
-
+        obj = UserPoints(user_name=user_name, user_points=user_points)
         obj.save()
         new_obj = UserPoints.objects.get(user_name=user_name)
 
