@@ -20,9 +20,19 @@ border-color: #dc3545;
 .leadership-board{
     text-transform: capitalize;
 }
-
+.form-invalid-entry{
+    color: #dc3545;
+    font-weight: 600;
+    float: left;
+}
 .loader{
     padding-top: 3em;
     width: 15%;
+    margin: 0 auto;
+}
+
+.pancard-image-loader{
+    padding-top: 1em;
+    width: 100%;
     margin: 0 auto;
 }

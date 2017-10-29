@@ -1,20 +1,39 @@
 import React, { Component } from 'react';
-import { Field, reduxForm } from "redux-form";
-// import { connect } from "react-redux";
-// import { verifyPANDetails } from "../actions";
+import { Field, reduxForm, change  } from "redux-form";
+import { connect } from "react-redux";
+import { verifyPANDetails,getPANDetails } from "../actions";
 
 class VerifyPAN extends Component {
 
+    constructor(props){
+        super(props);
+        this.state={
+            panCardImage:''
+        }           
+      }
+
+    componentDidMount(){
+        const { id } = this.props.match.params;
+        this.state.panCardImage ? '' : this.setState({ panCardImage : '../../images/loader.gif' });        
+        this.props.getPANDetails(id);        
+    }
+
+    componentWillReceiveProps(nextProps){
+        this.props.dispatch(change('VerifyPANForm', 'image_name', nextProps.panDetails.image_name ));
+        this.props.dispatch(change('VerifyPANForm', 'image_dob',  nextProps.panDetails.image_dob));
+        this.props.dispatch(change('VerifyPANForm', 'image_pan',  nextProps.panDetails.image_pan));
+        this.setState({ panCardImage : nextProps.panDetails.image_url });
+    }
+
     renderField(field) {
-        console.log(field);
         const { meta: { touched, error } } = field;
         const className = `form-group ${touched && error ? "has-danger" : ""}`;
     
         return (
           <div className={className}>
-            <label className="text-left">{field.label}</label>
+            <label className="float-left">{field.label}</label>
             <input className="form-control" type="text" {...field.input} />
-            <div className="text-danger">
+            <div className="form-invalid-entry">
               {touched ? error : ""}
             </div>
           </div>
@@ -22,7 +41,10 @@ class VerifyPAN extends Component {
     }
 
     onSubmit(values) {
-       console.log('Submit',values);
+        const { id } = this.props.match.params;
+        this.props.verifyPANDetails(values,id, () => {
+            this.props.history.push("/");
+        });
     }
 
     render() {
@@ -39,36 +61,33 @@ class VerifyPAN extends Component {
                             Uploaded PAN Card
                         </div>
                         <div className="card-body">
-                            <img  className="rounded mx-auto verify-card" src="../../images/sample.jpg"></img>                              
+                            <img  className="pancard-image-loader" src={this.state.panCardImage}></img>                              
                         </div>                        
                     </div>  
                 </div>   
                 <div className="col-6">
-                    <div className="card text-center">
-                        <div className="card-header">
+                    <div className="card">
+                        <div className="card-header text-center">
                             Validate the PAN Card Details
                         </div>
                         <div className="card-body">
                             <form className="capitalise-content" onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                                 <Field
                                 label="Full Name"
-                                name="name"
+                                name="image_name"
                                 component={this.renderField}  
-                                value="raja"                             
                                 />
                                 <Field
                                 label="Date of Birth"
-                                name="dob"
+                                name="image_dob"
                                 component={this.renderField}
-                                value="raja"     
                                 />
                                 <Field
                                 label="PAN"
-                                name="pan"
+                                name="image_pan"
                                 component={this.renderField}
-                                value="raja"     
                                 />
-                                <button type="submit" className="btn btn-primary">Submit</button>
+                                <button type="submit" className="btn btn-primary btn-block">Submit</button>
                             </form>             
                         </div>                        
                     </div>  
@@ -79,19 +98,39 @@ class VerifyPAN extends Component {
     }
   }
 
+  function validateDate(date){
+        let flag=0;
+        if(date.length == 10)
+        {
+            let dateArray=date.split('/');
+            for(let i=0;i<3;i++)
+            {
+                if(dateArray[i].isNaN)
+                    flag=1;
+            }
+            if(dateArray[0]>31)
+            flag=1;
+            if(dateArray[1]>12)
+            flag=1;
+            if(dateArray[2]>new Date().getFullYear())
+            flag=1;
+        } else flag=1;
+        return flag;
+  }
+
   function validate(values) {
    // console.log('Validate',values);
     const errors = {};
   
     // Validate the inputs from 'values'
-    if (!values.name) {
-      errors.name = "Enter full name";
+    if (!values.image_name) {
+      errors.image_name = "Enter full name";
     }
-    if (!values.dob) {
-      errors.dob = "Enter date of birth";
+    if (!values.image_dob || values.image_dob.length>10 || validateDate(values.image_dob)) {
+      errors.image_dob = "Enter valid date of birth";
     }
-    if (!values.pan) {
-      errors.pan = "Enter PAN";
+    if (!values.image_pan || values.image_pan.length>10) {
+      errors.image_pan = "Enter valid PAN";
     }
   
     // If errors is empty, the form is fine to submit
@@ -99,7 +138,11 @@ class VerifyPAN extends Component {
     return errors;
   }
 
+  function mapStateToProps(state) {
+    return { panDetails: state.instamojo };
+  }
+
   export default reduxForm({
     validate,
     form: "VerifyPANForm"
-  })(VerifyPAN);
+  })(connect(mapStateToProps, { verifyPANDetails,getPANDetails })(VerifyPAN));

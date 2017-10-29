@@ -14,11 +14,11 @@ class ImageUpload extends Component {
       }
 
       componentWillReceiveProps(nextProps) {
-        console.log(nextProps.panDetails.user_pan);
+        console.log(nextProps.panDetails.user_id);
         console.log(nextProps);
-        if(nextProps.panDetails.user_pan){ 
+        if(nextProps.panDetails.user_id){ 
             console.log('redirect');
-                this.props.history.push("/verify/3");
+                this.props.history.push(`/verify/${nextProps.panDetails.user_id}`);
         }       
       }
 
@@ -53,7 +53,7 @@ class ImageUpload extends Component {
             const { id } = this.props.match.params;
             console.log('Accepted files: ', id, acceptedFiles);
             this.setState({ processing : 1 });   
-            this.props.uploadPAN(acceptedFiles);                     
+            this.props.uploadPAN(id,acceptedFiles);                     
         } else {
             this.setState({ fileError : 1 });
         }       

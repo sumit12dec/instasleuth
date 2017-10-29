@@ -30,7 +30,8 @@ class LeadershipBoard extends Component {
     return (
       <div>
         <img  className="rounded mx-auto d-block p-5 logo" src="../../images/logo.png"></img>
-        <h3 className="pb-3 text-center">Leadership Board</h3>     
+        <h3 className="pb-3 text-center">Leadership Board</h3>
+        <p className="pb-1 text-center">Please select your profile to begin upload</p>     
         <ul className="list-group leadership-board">
           {this.renderUsers()}
         </ul>   
